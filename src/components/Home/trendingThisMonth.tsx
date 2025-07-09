@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, CardMedia, Paper, Stack } from "@mui/material";
+import { Box, Card, CardContent, CardMedia, Stack } from "@mui/material";
 import { ArrowUpRight, Calendar1, Clock4 } from "lucide-react";
 import { Link } from "react-router-dom";
 
