@@ -3,7 +3,7 @@ import { Box, Button, Grid, Stack, TextField } from "@mui/material";
 const ResetPassword = () => {
   return (
     <>
-      <Box>
+      <Box sx={{ minHeight: "76vh" }}>
         <Grid container justifyContent={"center"} mt={"3rem"} mb={"3rem"}>
           <Grid
             border={"1px solid black"}

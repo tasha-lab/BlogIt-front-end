@@ -7,7 +7,7 @@ const TrendingThisMonth = () => {
     <>
       <div className="trending-today">
         <div className="title-today">
-          <h2>TrendingToday</h2>
+          <h2>Trending This month</h2>
         </div>
         <Stack
           spacing={3}

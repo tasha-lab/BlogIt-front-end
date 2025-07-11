@@ -27,7 +27,9 @@ const Navbar = () => {
         </h4>
       </div>
       <div className="profile">
-        <CiUser />
+        <Link className="profile-link" to="/dashboard">
+          <CiUser />
+        </Link>
       </div>
     </div>
   );
