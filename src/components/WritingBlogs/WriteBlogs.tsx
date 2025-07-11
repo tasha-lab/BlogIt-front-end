@@ -28,6 +28,10 @@ const WritingBlogs = () => {
     },
     onSuccess: (data) => {
       console.log(data.message);
+      setContent("");
+      setSynopsis("");
+      setTitle("");
+      setPostImage("");
     },
   });
   const handleBlogInput = () => {
@@ -62,7 +66,9 @@ const WritingBlogs = () => {
                 />
               </div>
               <div className="blog-Synopsis">
-                <h4>Synopsis</h4>
+                <h4>
+                  Synopsis <h5>(Max 20 words)</h5>
+                </h4>
                 <TextField
                   multiline
                   minRows={5}
@@ -94,7 +100,9 @@ const WritingBlogs = () => {
           </div>
           <Paper className="post-image">
             <Stack className="blog-picture">
-              <h4>Enter an image for your blog</h4>
+              <h4>
+                Enter an image for your blog<h5>(Link)</h5>
+              </h4>
               <TextField
                 type="text"
                 value={postImage}

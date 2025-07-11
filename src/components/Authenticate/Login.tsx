@@ -32,7 +32,7 @@ const Login = () => {
     },
     onSuccess: () => {
       console.log("Login successful");
-      navigate("/dashboard");
+      navigate("/");
     },
   });
 

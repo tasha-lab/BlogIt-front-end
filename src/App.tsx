@@ -11,6 +11,7 @@ import DashboardLayout from "./pages/Dashboardlayout"; // move to components
 import Profile from "./pages/profile";
 import WriteBlogs from "./pages/WriteBlogs";
 import Dashboard from "./pages/Dashboard";
+import Blog from "./pages/blog";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/blogs" element={<Blogpage />} />
+        <Route path="/blog/:blogId" element={<Blog />} />
         <Route path="/writeBlogs" element={<WriteBlogs />} />
 
         <Route element={<DashboardLayout />}>
