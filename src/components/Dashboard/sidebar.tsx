@@ -1,3 +1,4 @@
+import { Button, Stack } from "@mui/material";
 import { Eye, Plus, UserPen } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -5,19 +6,34 @@ const SideBar = () => {
   return (
     <>
       <div className="sidebar">
-        <div className="sidebar-links">
-          <Link className="side-link" to="/writeBlogs">
-            <Plus /> Create Blog
-          </Link>
-          <Link className="side-link" to="/viewBlogs">
-            <Eye />
+        <Stack spacing={3} direction={"column"} className="sidebar-links">
+          <Button
+            component={Link}
+            sx={{ color: "#000000" }}
+            className="side-link"
+            to="/writeBlogs"
+          >
+            <Plus style={{ marginRight: "1rem" }} /> Create Blog
+          </Button>
+          <Button
+            component={Link}
+            sx={{ color: "#000000" }}
+            className="side-link"
+            to="/blogs"
+          >
+            <Eye style={{ marginRight: "1rem" }} />
             View Blogs
-          </Link>
-          <Link className="side-link" to="/profile">
-            <UserPen />
+          </Button>
+          <Button
+            component={Link}
+            sx={{ color: "#000000" }}
+            className="side-link"
+            to="/profile"
+          >
+            <UserPen style={{ marginRight: "1rem" }} />
             Profile
-          </Link>
-        </div>
+          </Button>
+        </Stack>
       </div>
     </>
   );

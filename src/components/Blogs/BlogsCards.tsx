@@ -1,6 +1,6 @@
 // src/components/Blogs/BlogsCards.tsx
 import { Box, Card, CardContent, CardMedia } from "@mui/material";
-import { ArrowUpRight, Calendar1, Clock4 } from "lucide-react";
+import { ArrowUpRight, Calendar1, Camera, Clock4 } from "lucide-react";
 import { Link } from "react-router-dom";
 interface Blog {
   blogId: string;
@@ -22,7 +22,13 @@ const BlogsCards = ({ blog }: BlogsCardProps) => {
     <Box>
       <Card className="card" sx={{ bgcolor: "background.default" }}>
         <CardMedia className="cardMedia" sx={{ bgcolor: "#FFFFFF" }}>
-          <img src={blog.postImage} alt="Blog image" />
+          {blog.postImage ? (
+            <img src={blog.postImage} alt="Blog image" />
+          ) : (
+            <div className="placeholder-image">
+              <Camera />
+            </div>
+          )}
         </CardMedia>
 
         <CardContent className="cardContent">

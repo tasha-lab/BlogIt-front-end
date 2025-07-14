@@ -46,7 +46,7 @@ const Login = () => {
   };
 
   return (
-    <Box sx={{ minHeight: "72vh" }}>
+    <Box sx={{ minHeight: "88vh" }}>
       <Grid container justifyContent="center" mb="2rem" mt="2rem">
         <Grid
           border={"1px solid black"}

@@ -10,6 +10,9 @@ const DashboardLayout = () => {
         <SideBar />
         <div className="main-content">
           <div className="page-content">
+            <div className="profile-header">
+              <h3>My posts</h3>
+            </div>
             <Outlet />
           </div>
         </div>

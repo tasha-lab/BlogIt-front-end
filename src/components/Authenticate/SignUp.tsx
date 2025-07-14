@@ -1,7 +1,7 @@
 import { Box, Button, Grid, Stack, TextField, Typography } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Api from "../../Api/axios";
 
 interface User {
@@ -19,6 +19,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
+  const navigate = useNavigate();
 
   const { isPending, mutate } = useMutation({
     mutationKey: ["registerUser"],
@@ -31,6 +32,7 @@ const Signup = () => {
     },
     onSuccess: (data) => {
       console.log(data.message);
+      navigate("/");
     },
   });
 
