@@ -2,7 +2,7 @@ import { Button, Paper, Stack, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import Api from "../../Api/axios";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 interface Blog {
   title: string;
@@ -28,6 +28,8 @@ const EditingPost = () => {
   const [synopsis, setSynopsis] = useState("");
   const [content, setContent] = useState("");
   const [postImage, setPostImage] = useState("");
+
+  const navigate = useNavigate();
   const { blogId } = useParams();
   const { isPending, mutate } = useMutation({
     mutationKey: ["EditingABlog"],
@@ -44,6 +46,7 @@ const EditingPost = () => {
       setSynopsis("");
       setTitle("");
       setPostImage("");
+      navigate("/dashboard");
     },
   });
   const handleEditBlog = () => {

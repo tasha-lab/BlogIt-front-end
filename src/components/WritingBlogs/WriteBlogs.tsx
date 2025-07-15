@@ -3,6 +3,7 @@ import Navbar from "../Common/Navbar";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import Api from "../../Api/axios";
+import { useNavigate } from "react-router-dom";
 
 interface Blog {
   title: string;
@@ -16,7 +17,7 @@ const WritingBlogs = () => {
   const [synopsis, setSynopsis] = useState("");
   const [content, setContent] = useState("");
   const [postImage, setPostImage] = useState("");
-
+  const navigate = useNavigate();
   const { isPending, mutate } = useMutation({
     mutationKey: ["creatingANewBlog"],
     mutationFn: async (newblog: Blog) => {
@@ -32,6 +33,7 @@ const WritingBlogs = () => {
       setSynopsis("");
       setTitle("");
       setPostImage("");
+      navigate("/dashboard");
     },
   });
   const handleBlogInput = () => {
