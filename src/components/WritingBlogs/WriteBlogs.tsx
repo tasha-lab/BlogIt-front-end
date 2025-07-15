@@ -111,9 +111,7 @@ const WritingBlogs = () => {
           </div>
           <Paper className="post-image">
             <Stack className="blog-picture">
-              <h4>
-                Enter an image for your blog<h5>(Link)</h5>
-              </h4>
+              <h4>Enter an image for your blog</h4>
               <TextField
                 type="text"
                 value={postImage}
