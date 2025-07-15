@@ -1,4 +1,4 @@
-import { TextField, Typography, Box, Stack, Button } from "@mui/material";
+import { TextField, Stack, Button } from "@mui/material";
 
 const Newsletter = () => {
   return (

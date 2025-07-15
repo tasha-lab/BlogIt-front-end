@@ -1,4 +1,3 @@
-import React from "react";
 import EditingPost from "../components/EditingPost/EditPost";
 
 const EditPost = () => {

@@ -1,7 +1,7 @@
 import { Box, Button, Grid, Stack, TextField } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+
 import Api from "../../Api/axios";
 import { useAuth } from "../../store/useAuth";
 
@@ -13,8 +13,6 @@ interface User {
 }
 
 const EditProfile = () => {
-  const location = useLocation();
-  const editProfileDetails = location.state?.user;
   const { user, refreshUser } = useAuth();
   console.log(user);
   const [firstName, setFirstName] = useState(user?.firstName || "");

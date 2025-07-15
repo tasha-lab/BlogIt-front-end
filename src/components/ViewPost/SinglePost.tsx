@@ -1,4 +1,4 @@
-import { Avatar, Button, Paper, Typography } from "@mui/material";
+import { Avatar, Button, Paper } from "@mui/material";
 import { Calendar1, Share2 } from "lucide-react";
 
 interface SingleBlog {

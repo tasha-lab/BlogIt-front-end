@@ -10,7 +10,7 @@ interface TokenPayload {
 }
 const DashboardLayout = () => {
   const navigate = useNavigate();
-  const { user, token, logout } = useAuth();
+  const { token, logout } = useAuth();
 
   useEffect(() => {
     if (!token) {
