@@ -14,7 +14,6 @@ interface User {
 
 const EditProfile = () => {
   const { user, refreshUser } = useAuth();
-  console.log(user);
   const [firstName, setFirstName] = useState(user?.firstName || "");
   const [lastName, setlastName] = useState(user?.lastName || "");
   const [email, setEmail] = useState(user?.email || "");

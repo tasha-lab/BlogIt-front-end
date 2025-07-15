@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const Api = axios.create({
-  baseURL: "https://blogit-db3x.onrender.com/api",
+  // baseURL: "https://blogit-db3x.onrender.com/api",
+  baseURL: "http://localhost:3000/api",
   headers: {
     "Content-Type": "application/json",
   },
