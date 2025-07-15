@@ -5,41 +5,58 @@ import { useMutation } from "@tanstack/react-query";
 import Api from "../../Api/axios";
 import { useNavigate } from "react-router-dom";
 
-interface Blog {
-  title: string;
-  synopsis: string;
-  content: string;
-  postImage: string;
-}
-
 const WritingBlogs = () => {
   const [title, setTitle] = useState("");
   const [synopsis, setSynopsis] = useState("");
   const [content, setContent] = useState("");
-  const [postImage, setPostImage] = useState("");
+  const [postImage, setPostImage] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
   const navigate = useNavigate();
+
   const { isPending, mutate } = useMutation({
     mutationKey: ["creatingANewBlog"],
-    mutationFn: async (newblog: Blog) => {
-      const response = await Api.post("/blogs", newblog);
+    mutationFn: async (formData: FormData) => {
+      const response = await Api.post("/blogs", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return response.data;
     },
     onError: (error: any) => {
       console.error("Posting error:", error.response?.data?.message);
+      console.log(error);
     },
     onSuccess: (data) => {
       console.log(data.message);
-      setContent("");
-      setSynopsis("");
       setTitle("");
-      setPostImage("");
+      setSynopsis("");
+      setContent("");
+      setPostImage(null);
+      setPreviewImage(null);
       navigate("/dashboard");
     },
   });
+
   const handleBlogInput = () => {
-    const newBlog = { title, synopsis, content, postImage };
-    console.log(newBlog);
-    mutate(newBlog);
+    if (!postImage) return;
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("synopsis", synopsis);
+    formData.append("content", content);
+    formData.append("postImage", postImage);
+
+    mutate(formData);
+    console.log(formData);
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setPostImage(file);
+      setPreviewImage(URL.createObjectURL(file));
+    }
   };
 
   return (
@@ -109,20 +126,33 @@ const WritingBlogs = () => {
               </div>
             </Paper>
           </div>
-          <Paper className="post-image">
+
+          <Paper sx={{ mt: "3rem" }} className="post-image">
             <Stack className="blog-picture">
               <h4>Enter an image for your blog</h4>
-              <TextField
-                type="text"
-                value={postImage}
-                onChange={(e) => setPostImage(e.target.value)}
-                className="picture-input"
+              <input
+                style={{ display: "flex" }}
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
               />
+              {previewImage && (
+                <img
+                  src={previewImage}
+                  alt="Preview"
+                  style={{
+                    marginTop: "1rem",
+                    maxWidth: "7%",
+                    borderRadius: ".8rem",
+                  }}
+                />
+              )}
             </Stack>
           </Paper>
+
           <div className="post-button">
             <Button
-              loading={isPending}
+              disabled={isPending}
               onClick={handleBlogInput}
               sx={{ width: "60rem", marginBottom: "2rem" }}
               variant="contained"
