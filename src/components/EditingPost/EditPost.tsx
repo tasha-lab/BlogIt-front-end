@@ -1,8 +1,8 @@
 import { Button, Paper, Stack, TextField } from "@mui/material";
-import Navbar from "../Common/Navbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import Api from "../../Api/axios";
+import { useLocation, useParams } from "react-router-dom";
 
 interface Blog {
   title: string;
@@ -11,20 +11,32 @@ interface Blog {
   postImage: string;
 }
 
-const WritingBlogs = () => {
+const EditingPost = () => {
+  const location = useLocation();
+  const editBlogDetails = location.state?.blog;
+
+  useEffect(() => {
+    if (editBlogDetails) {
+      setTitle(editBlogDetails.title);
+      setSynopsis(editBlogDetails.synopsis);
+      setContent(editBlogDetails.content);
+      setPostImage(editBlogDetails.postImage);
+    }
+  }, [editBlogDetails]);
+
   const [title, setTitle] = useState("");
   const [synopsis, setSynopsis] = useState("");
   const [content, setContent] = useState("");
   const [postImage, setPostImage] = useState("");
-
+  const { blogId } = useParams();
   const { isPending, mutate } = useMutation({
-    mutationKey: ["creatingANewBlog"],
-    mutationFn: async (newblog: Blog) => {
-      const response = await Api.post("/blogs", newblog);
+    mutationKey: ["EditingABlog"],
+    mutationFn: async (editedblog: Blog) => {
+      const response = await Api.patch(`/blogs/${blogId}`, editedblog);
       return response.data;
     },
     onError: (error: any) => {
-      console.error("Posting error:", error.response?.data?.message);
+      console.error("Edit error:", error.response?.data?.message);
     },
     onSuccess: (data) => {
       console.log(data.message);
@@ -34,30 +46,26 @@ const WritingBlogs = () => {
       setPostImage("");
     },
   });
-  const handleBlogInput = () => {
-    const newBlog = { title, synopsis, content, postImage };
-    console.log(newBlog);
-    mutate(newBlog);
+  const handleEditBlog = () => {
+    const newDetails = { title, synopsis, content, postImage };
+    mutate(newDetails);
   };
 
   return (
     <>
-      <Navbar />
+      <div className="profile-header">
+        <div className="edit-img">
+          <img
+            className="animate__animated animate__slideInDown"
+            src="/images/pens.webp"
+            alt=""
+          />
+        </div>
+        <h3>Edit post</h3>
+      </div>
       <div className="blog-content">
         <div className="creating-a-blog">
           <div className="post-card">
-            <div className="blog-header">
-              <h1>
-                <div className="create-img">
-                  <img
-                    className="animate__animated animate__jackInTheBox"
-                    src="/images/create-blog.webp"
-                    alt=""
-                  />
-                </div>
-                Create a Blog
-              </h1>
-            </div>
             <Paper className="blog-form">
               <div className="blog-title">
                 <h4>Title</h4>
@@ -79,6 +87,7 @@ const WritingBlogs = () => {
                   Synopsis <h5>(Max 20 words)</h5>
                 </h4>
                 <TextField
+                  required
                   multiline
                   minRows={5}
                   value={synopsis}
@@ -123,11 +132,11 @@ const WritingBlogs = () => {
           <div className="post-button">
             <Button
               loading={isPending}
-              onClick={handleBlogInput}
+              onClick={handleEditBlog}
               sx={{ width: "60rem", marginBottom: "2rem" }}
               variant="contained"
             >
-              Post
+              Edit Post
             </Button>
           </div>
         </div>
@@ -136,4 +145,4 @@ const WritingBlogs = () => {
   );
 };
 
-export default WritingBlogs;
+export default EditingPost;

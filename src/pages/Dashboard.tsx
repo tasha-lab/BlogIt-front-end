@@ -1,7 +1,7 @@
-import Dashboardposts from "../components/Dashboard/Dashboardposts";
 import { useQuery } from "@tanstack/react-query";
 import Api from "../Api/axios";
 import { GridLoader } from "react-spinners";
+import Dashboardposts from "../components/Dashboard/dashboardblogs";
 
 interface Blog {
   blogId: string;
@@ -9,9 +9,14 @@ interface Blog {
   title: string;
   synopsis: string;
   dateCreated: string;
+  isDeleted: boolean;
 }
 const Dashboard = () => {
-  const { data: blog = [], isLoading } = useQuery<Blog[]>({
+  const {
+    data: blog = [],
+    isLoading,
+    refetch,
+  } = useQuery<Blog[]>({
     queryKey: ["individualposts"],
     queryFn: async () => {
       const response = await Api.get("/blogs/user/blog");
@@ -28,8 +33,16 @@ const Dashboard = () => {
   }
   return (
     <div>
+      <div className="profile-header">
+        <h3>My posts</h3>
+      </div>
       {blog.map((blog: Blog, index: number) => (
-        <Dashboardposts key={blog.blogId} delay={index} blog={blog} />
+        <Dashboardposts
+          key={blog.blogId}
+          delay={index}
+          blog={blog}
+          refetch={refetch}
+        />
       ))}
     </div>
   );

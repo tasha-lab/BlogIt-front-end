@@ -1,8 +1,13 @@
 import { Button, Stack } from "@mui/material";
-import { Eye, Plus, UserPen } from "lucide-react";
+import { Eye, LogOut, Plus, UserPen } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../store/useAuth";
 
 const SideBar = () => {
+  const { logout } = useAuth();
+  const handleLogout = () => {
+    logout();
+  };
   return (
     <>
       <div className="sidebar">
@@ -31,7 +36,15 @@ const SideBar = () => {
             to="/profile"
           >
             <UserPen style={{ marginRight: "1rem" }} />
-            Profile
+            Edit Profile
+          </Button>
+          <Button
+            onClick={handleLogout}
+            sx={{ color: "#000000" }}
+            className="side-link"
+          >
+            <LogOut style={{ marginRight: "1rem" }} />
+            Log out
           </Button>
         </Stack>
       </div>

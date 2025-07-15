@@ -7,11 +7,12 @@ import Blogpage from "./pages/blogpage";
 import ResetPasswordPage from "./pages/resetPasswordPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/signupPage";
-import DashboardLayout from "./pages/Dashboardlayout"; // move to components
-import Profile from "./pages/profile";
+import DashboardLayout from "./pages/Dashboardlayout";
 import WriteBlogs from "./pages/WriteBlogs";
 import Dashboard from "./pages/Dashboard";
 import Blog from "./pages/blog";
+import EditPost from "./pages/EditPost";
+import Profile from "./pages/profile";
 
 const App = () => {
   return (
@@ -26,8 +27,9 @@ const App = () => {
         <Route path="/writeBlogs" element={<WriteBlogs />} />
 
         <Route element={<DashboardLayout />}>
-          <Route path="/dashboard/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/dashboard/" element={<Dashboard />} />
+          <Route path="/editpost/:blogId" element={<EditPost />} />
         </Route>
       </Routes>
       <Footer />

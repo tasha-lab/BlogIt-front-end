@@ -32,7 +32,7 @@ const Signup = () => {
     },
     onSuccess: (data) => {
       console.log(data.message);
-      navigate("/");
+      navigate("/login");
     },
   });
 

@@ -557,9 +557,11 @@ body {
 .dashboard-container {
   display: flex;
   gap: 13rem;
-  min-height: 100vh;
+  min-height: 50vh;
 }
-
+.page-content {
+  width: 100vh;
+}
 .sidebar {
   width: 35rem;
   display: flex;
@@ -592,6 +594,7 @@ body {
   justify-content: center;
   height: 100%;
   align-items: center;
+  background-color: rgb(221, 217, 217);
 }
 .user-profile {
   width: 100%;
@@ -627,9 +630,32 @@ body {
 .users-post-synopsis p {
   margin-top: 1rem;
 }
+.editpost {
+  margin-top: 1rem;
+}
 .users-post-date {
   position: relative;
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
+}
+
+.edit-img {
+  height: 9rem;
+  width: 9rem;
+  margin-top: 1rem;
+}
+.edit-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.create-img {
+  height: 9rem;
+  width: 9rem;
+}
+.create-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
